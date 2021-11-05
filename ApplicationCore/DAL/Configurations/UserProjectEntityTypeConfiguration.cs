@@ -11,6 +11,7 @@ namespace ApplicationCore.DAL.Configurations
     {
         public void Configure(EntityTypeBuilder<UserProject> builder)
         {
+            builder.HasKey(x => new { x.ProjectId, x.UserId });
             //builder.HasMany(x => x.UserId).WithOne(y => y.Id);
         }
     }
