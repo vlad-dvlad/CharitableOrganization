@@ -5,13 +5,13 @@ using System.Text;
 
 namespace ApplicationCore.Entites
 {
-    [Table("UserProject")]
-    class UserProject
+    public class UserProject
     {
-        [ForeignKey("User")]
         public int UserId { get; set; }
-        
-        [ForeignKey("Role")]
-        public int RoleId { get; set; }
+        public User User { get; set; }
+
+        public int ProjectId { get; set; }
+        public Project Project { get; set; }
+
     }
 }

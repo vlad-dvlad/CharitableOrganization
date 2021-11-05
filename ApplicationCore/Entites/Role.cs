@@ -6,12 +6,10 @@ using System.Text;
 
 namespace ApplicationCore.Entites
 {
-    [Table("Role")]
-    class Role : BaseEntity
+    public class Role : BaseEntity
     {
-        [MaxLength(30)]
-        [Required]
         public string RoleName { get; set; }
-    
+        public ICollection<User> Users { get; set; }
+
     }
 }
