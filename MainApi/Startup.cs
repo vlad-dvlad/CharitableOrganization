@@ -1,12 +1,17 @@
+using ApplicationCore.Contracts;
 using ApplicationCore.DAL;
+using ApplicationCore.Entites;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace MainApi
 {
@@ -25,6 +30,26 @@ namespace MainApi
             services.AddDbContext<AppDbContext>(x => x.UseSqlServer(Configuration.GetConnectionString("MainDb")));
 
             services.AddControllersWithViews();
+
+            services.AddScoped<IUserManager, ApplicationCore.Services.UserManager>();
+            services.AddSingleton<IPasswordHasher<User>, PasswordHasher<User>>();
+
+            services.AddAuthentication("Bearer")
+                .AddJwtBearer("Bearer", options =>
+                {
+                    var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["jwtSecret"]));
+
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        IssuerSigningKey = securityKey,
+                        ValidateAudience = true,
+                        ValidAudience = Configuration["jwtAudience"],
+                        ValidateIssuer = true,
+                        ValidIssuer = Configuration["jwtIssuer"]
+                    };
+                });
+
+            services.AddAuthorization();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -50,11 +75,12 @@ namespace MainApi
 
             app.UseRouting();
 
+            app.UseAuthentication();
+            app.UseAuthorization();
+
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller}/{action=Index}/{id?}");
+                endpoints.MapControllers();
             });
 
             app.UseSpa(spa =>

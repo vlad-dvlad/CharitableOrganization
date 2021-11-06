@@ -16,6 +16,9 @@ namespace ApplicationCore.DAL.Configurations
             builder.HasMany(r => r.Users)
                 .WithOne(u => u.Role)
                 .HasForeignKey(u => u.RoleId);
+
+            builder.HasData(new Role { Id = 1, RoleName = "User" });
+            builder.HasData(new Role { Id = 2, RoleName = "Admin" });
         }
     }
 }
