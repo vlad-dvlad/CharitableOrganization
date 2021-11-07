@@ -29,5 +29,9 @@ namespace MainApi.Controllers
         [Authorize]
         [HttpGet("secret")]
         public async Task<IActionResult> Secret() => Ok(new { Secret = "This is some secret info" });
+
+        [Authorize(Policy = "Admin")]
+        [HttpGet("secretAdmin")]
+        public async Task<IActionResult> SecretAdmin() => Ok(new { Secret = "This is some secret info" });
     }
 }

@@ -1,6 +1,7 @@
 using ApplicationCore.Contracts;
 using ApplicationCore.DAL;
 using ApplicationCore.Entites;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -49,7 +50,12 @@ namespace MainApi
                     };
                 });
 
-            services.AddAuthorization();
+            services.AddAuthorization(options => {
+                options.AddPolicy("Admin", new AuthorizationPolicyBuilder().RequireAuthenticatedUser()
+                    .RequireClaim("Role", "Admin").Build());
+
+                options.DefaultPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+            });
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
