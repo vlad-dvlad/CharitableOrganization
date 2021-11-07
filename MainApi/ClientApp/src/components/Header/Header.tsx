@@ -1,4 +1,5 @@
 ﻿import React from "react";
+import NavBar from "../NavBar/NavBar";
 import s from "./header.module.scss";
 
 const Header = () => {
@@ -10,13 +11,9 @@ const Header = () => {
                         <h2>Благодійна організація</h2>
                     </div>
                     <div className={s.header__content}>
-                        <div className={s.header__item}>Проекти</div>
-                        <div className={s.header__item}>Звітність</div>
-                        <div className={s.header__item}>Про нас</div>
-                        <div className={s.header__item}>Вхід</div>
+                        <NavBar />
                     </div>
                 </div>
-
             </div>
         </header>
     );

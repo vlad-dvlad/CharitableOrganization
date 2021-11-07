@@ -35,18 +35,11 @@ $mainFont: 'Poppins', sans-serif;
     }
 
     &__content {
-        display: flex;
         font-size: 18px;
         color: #eee;
         text-transform: uppercase;
         font-family: $mainFont;
     }
 
-    &__item {
-        margin: 0px 20px 0px 0px;
-
-        &:last-child {
-            margin-right: 0;
-        }
-    }
+   
 }

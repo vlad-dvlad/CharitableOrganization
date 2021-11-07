@@ -1,0 +1,19 @@
+﻿.navbar {
+    height: 100%;
+
+    &__list {
+        display: flex;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 0;
+    }
+
+    &__item {
+        margin: 0px 20px 0px 0px;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+}
