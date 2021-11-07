@@ -1,6 +1,7 @@
-﻿import React from "react";
+﻿import * as React from 'react';
 import NavBar from "../NavBar/NavBar";
-import s from "./header.module.scss";
+
+const s = require("./header.module.scss");
 
 const Header = () => {
     return (
