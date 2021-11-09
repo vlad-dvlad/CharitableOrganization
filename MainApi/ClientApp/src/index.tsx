@@ -8,11 +8,14 @@ import { createBrowserHistory } from 'history';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter } from 'react-router-dom';
+import { store } from './store/configStore';
 
 
 ReactDOM.render(
     <BrowserRouter>
-        <App />
+        <Provider store={ store } >
+            <App />
+        </Provider>
     </BrowserRouter>
     , document.getElementById('root'));
 

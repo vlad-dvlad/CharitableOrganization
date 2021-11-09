@@ -1,0 +1,70 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Poppins:ital,wght@0,700;1,400&display=swap');
+
+$mainFont: 'Poppins', sans-serif;
+$lato: 'Lato', sans-serif;
+
+
+.login {
+
+
+    &__container {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        ;
+        margin-top: 50px;
+    }
+
+    &__form {
+        width: 600px;
+        height: 50px;
+        margin-bottom: 25px;
+
+        &:last-child {
+            margin: 0px;
+        }
+    }
+
+    &__style {
+        background-color: rgb(221, 217, 217);
+        padding: 5px;
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        color: #000;
+        font-size: 18px;
+        font-family: $lato;
+    }
+
+    &__btn {
+        width: 600px;
+        height: 50px;
+    }
+
+    &__submit {
+        width: 100%;
+        height: 100%;
+        background-color: #b33a94e7;
+        font-size: 18px;
+        font-family: $lato;
+        color: #eee;
+        border-radius: 10px;
+    }
+
+
+    &__fname {
+    }
+
+    &__lname {
+    }
+
+    &__email {
+    }
+
+    &__username {
+    }
+
+    &__password {
+    }
+}

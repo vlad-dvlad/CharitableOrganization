@@ -30,9 +30,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\components\AboutUs\AboutUs.tsx" />
+    <None Remove="ClientApp\src\components\Auth\auth.module.scss" />
+    <None Remove="ClientApp\src\components\Auth\AuthContainer.tsx" />
     <None Remove="ClientApp\src\components\Content\Content.tsx" />
     <None Remove="ClientApp\src\components\Footer\Footer.tsx" />
+    <None Remove="ClientApp\src\components\Projects\Projects.tsx" />
+    <None Remove="ClientApp\src\components\Reports\Reports.tsx" />
+    <None Remove="ClientApp\src\hooks\useTypedSelector.ts" />
+    <None Remove="ClientApp\src\store\reducers\authReducer.ts" />
+    <None Remove="ClientApp\src\store\reducers\configReducers.ts" />
     <None Remove="ClientApp\src\store\reducers\userReducer.ts" />
+    <None Remove="ClientApp\src\types\auth\auth.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,11 +49,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\src\types\" />
+    <TypeScriptCompile Include="ClientApp\src\components\Auth\auth.module.scss" />
+    <TypeScriptCompile Include="ClientApp\src\store\reducers\userReducer.ts" />
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\src\store\reducers\userReducer.ts" />
+    <TypeScriptCompile Update="ClientApp\src\components\Auth\AuthContainer.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
