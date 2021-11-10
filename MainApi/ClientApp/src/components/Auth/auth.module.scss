@@ -50,6 +50,7 @@ $lato: 'Lato', sans-serif;
         font-family: $lato;
         color: #eee;
         border-radius: 10px;
+        border: #eee;
     }
 
 
@@ -67,4 +68,15 @@ $lato: 'Lato', sans-serif;
 
     &__password {
     }
+}
+
+.register {
+    //width: 600px;
+    //height: 50px;
+    //background-color: #b33a94e7;
+    //font-size: 18px;
+    //font-family: $lato;
+    //color: #eee;
+    //border-radius: 10px;
+    //border: #eee;
 }

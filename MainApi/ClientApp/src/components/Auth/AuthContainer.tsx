@@ -1,34 +1,32 @@
 ﻿import * as React from 'react';
+import Login from "./Login";
+import Register from "./Register";
+import {useState} from "react";
+import {usedTypedSelector} from "../../hooks/useTypedSelector";
+import {setRegisterUser} from "../../store/actionCreators/auth";
+import {useActions} from "../../hooks/useActions";
 const s = require("./auth.module.scss");
 
 const AuthContainer = () => {
+
+    let isRegister = usedTypedSelector(state => state.auth.isRegister);
+    let isAuth = usedTypedSelector(state => state.auth.isAuth);
+    const {setRegisterUser, setLoginUser} = useActions();
+
+    const setRegister = (flag : boolean) => {
+        setRegisterUser(flag);
+    }
+
+
     return (
         <div>
-            <div className={s.login}>
-                <div className={s.login__container}>
-                    <div className={s.login__form}>
-                        <input type="text" name="fname" placeholder="Ім'я" className={s.login__style} />
-                    </div>
-                    <div className={s.login__form}>
-                        <input type="text" name="lname" placeholder="Прізвище" className={s.login__style}  />
-                    </div>
-                    <div className={s.login__form}>
-                        <input type="email" name="email" placeholder="Електронна пошта" className={s.login__style}  />
-                    </div>
-                    <div className={s.login__form}>
-                        <input type="text" name="username" placeholder="Логін" className={s.login__style}  />
-                    </div>
-                    <div className={s.login__form}>
-                        <input type="password" name="password" placeholder="Пароль" className={s.login__style}  />
-                    </div>
-                    <div className={s.login__btn} >
-                        <button className={s.login__submit} >Зареєструватись</button>
-                        <div>Уже маєте акаунт? Виконайте вхід</div>
-                        <button>Вхід</button>
-                    </div>
-                </div>
-
-            </div>
+            {
+                isRegister && <Login setLoginUser={setLoginUser} isAuth={isAuth}/>
+            }
+            {
+                !isRegister && <Register />
+            }
+            <div onClick={() => setRegister(false)}>Registration</div>
         </div>
     );
 }

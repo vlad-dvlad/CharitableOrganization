@@ -22,14 +22,22 @@ var initialState = {
     loading: false,
     error: null,
     isAuth: false,
+    isRegister: true,
 };
+/**
+ *
+ * @param state - initial State for registration
+ * @param action - action operations for check register, set user (success, error)
+ */
 var authReducer = function (state, action) {
     if (state === void 0) { state = initialState; }
     switch (action.type) {
+        case auth_1.AuthActionTypes.SET_REGISTER:
+            return __assign(__assign({}, state), { isRegister: action.flag });
         case auth_1.AuthActionTypes.SET_USER:
-            return __assign({}, state);
+            return __assign(__assign({}, state), { loading: true, error: null });
         case auth_1.AuthActionTypes.SET_USER_SUCCESS:
-            return __assign(__assign({}, state), { loading: false, error: null });
+            return __assign(__assign({}, state), { loading: false, error: null, isAuth: true });
         case auth_1.AuthActionTypes.SET_USER_ERROR:
             return __assign(__assign({}, state), { loading: false, error: action.payload });
         default: return state;

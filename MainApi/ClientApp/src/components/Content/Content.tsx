@@ -3,6 +3,8 @@ import * as React from 'react';
 import { Route } from 'react-router';
 import AboutUs from '../AboutUs/AboutUs';
 import AuthContainer from '../Auth/AuthContainer';
+import Login from '../Auth/Login';
+import Register from '../Auth/Register';
 import Projects from '../Projects/Projects';
 import Reports from '../Reports/Reports';
 

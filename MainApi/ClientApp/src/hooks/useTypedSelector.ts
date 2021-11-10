@@ -2,3 +2,4 @@
 import { RootState } from "../store/reducers/configReducers";
 
 export const usedTypedSelector : TypedUseSelectorHook<RootState> = useSelector;
+ 

@@ -10,15 +10,25 @@ const initialState : AuthState = {
     loading: false,
     error: null,
     isAuth: false,
+    isRegister: true,
 }
 
 
+
+/**
+ *
+ * @param state - initial State for registration
+ * @param action - action operations for check register, set user (success, error)
+ */
+
 export const authReducer = (state = initialState, action: AuthAction): AuthState => {
     switch (action.type) {
+        case AuthActionTypes.SET_REGISTER:
+            return {...state, isRegister : action.flag}
         case AuthActionTypes.SET_USER :
-            return { ...state }
+            return { ...state, loading: true, error: null }
         case AuthActionTypes.SET_USER_SUCCESS:
-            return { ...state, loading: false, error: null }
+            return { ...state, loading: false, error: null, isAuth: true}
         case AuthActionTypes.SET_USER_ERROR:
             return { ...state, loading: false, error: action.payload}
         default: return state;
