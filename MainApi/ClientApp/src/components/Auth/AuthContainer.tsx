@@ -11,6 +11,8 @@ const AuthContainer = () => {
 
     let isRegister = usedTypedSelector(state => state.auth.isRegister);
     let isAuth = usedTypedSelector(state => state.auth.isAuth);
+
+
     const {setRegisterUser, setLoginUser} = useActions();
 
     const setRegister = (flag : boolean) => {

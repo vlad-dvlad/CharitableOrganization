@@ -28,7 +28,7 @@ export const authReducer = (state = initialState, action: AuthAction): AuthState
         case AuthActionTypes.SET_USER :
             return { ...state, loading: true, error: null }
         case AuthActionTypes.SET_USER_SUCCESS:
-            return { ...state, loading: false, error: null, isAuth: true}
+            return { ...state, loading: false, error: null, isAuth: action.isAuth}
         case AuthActionTypes.SET_USER_ERROR:
             return { ...state, loading: false, error: action.payload}
         default: return state;

@@ -38,7 +38,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.setLoginUser = exports.setRegisterUser = void 0;
 var auth_1 = require("../../types/auth/auth");
-var api_1 = require("../../api/api");
+var axios_1 = require("axios");
 var setRegisterUser = function (flag) { return ({ type: auth_1.AuthActionTypes.SET_REGISTER, flag: flag }); };
 exports.setRegisterUser = setRegisterUser;
 var setLoginUser = function (username, password) { return function (dispatch) { return __awaiter(void 0, void 0, void 0, function () {
@@ -48,13 +48,15 @@ var setLoginUser = function (username, password) { return function (dispatch) { 
             case 0:
                 _a.trys.push([0, 2, , 3]);
                 dispatch({ type: auth_1.AuthActionTypes.SET_USER });
-                return [4 /*yield*/, api_1.instance.post("users/auth", { username: username, password: password })];
+                return [4 /*yield*/, axios_1.default.post("http://localhost:5000/api/users/auth", { username: username, password: password })];
             case 1:
                 response = _a.sent();
-                dispatch({ type: auth_1.AuthActionTypes.SET_USER_SUCCESS, payload: response.data });
+                console.log("ssssssssssssss");
+                dispatch({ type: auth_1.AuthActionTypes.SET_USER_SUCCESS, payload: response.data, isAuth: true });
                 return [3 /*break*/, 3];
             case 2:
                 e_1 = _a.sent();
+                console.log("xxxxxxxxxxxx");
                 dispatch({
                     type: auth_1.AuthActionTypes.SET_USER_ERROR,
                     payload: "Error login user",

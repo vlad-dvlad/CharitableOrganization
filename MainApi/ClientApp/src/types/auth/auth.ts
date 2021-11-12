@@ -20,10 +20,12 @@ export enum AuthActionTypes {
 
 interface SetUserAction {
     type: AuthActionTypes.SET_USER;
+
 }
 
 interface SetUserActionSuccess {
     type: AuthActionTypes.SET_USER_SUCCESS;
+    isAuth: boolean;
     payload: any[];
 }
 

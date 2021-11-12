@@ -1,7 +1,9 @@
 import * as React from 'react';
-import { Redirect } from 'react-router';
-import {InjectedFormProps, reduxForm} from "redux-form";
+import { Redirect } from 'react-router-dom';
+
+import { InjectedFormProps, Field, reduxForm} from "redux-form";
 import {setLoginUser} from "../../store/actionCreators/auth";
+import {FC} from "react";
 
 const s = require("./auth.module.scss");
 
@@ -10,22 +12,23 @@ interface FormLoginProps {
     password: string,
 }
 
-interface  DispatchLoginProps {
-    setLoginUser: (u: string, p: string) => any,
-    isAuth: boolean
+interface StateLoginProps {
+    isAuth: boolean,
+}
+
+interface DispatchLoginProps {
+    setLoginUser: (u: string, p: string) => void,
 }
 
 
+const Login : FC<StateLoginProps & DispatchLoginProps> = (props) => {
 
-
-const Login = (props : DispatchLoginProps) => {
-
-    const onSubmit = (formData : any) => {
-        setLoginUser(formData.username, formData.password);
+    const onSubmit = (formData : FormLoginProps) => {
+        props.setLoginUser(formData.username, formData.password);
     }
 
     if (props.isAuth) {
-        return <Redirect to={'/'} />
+        return <Redirect to={'/aboutus'} />
     }
 
     return (
@@ -35,20 +38,16 @@ const Login = (props : DispatchLoginProps) => {
     );
 };
 
-const LoginForm = (props: any & InjectedFormProps<FormLoginProps, any>) => {
-
-    const handleSubmit = { ...props }
-
-    console.log("dfskjlkdfjslkjl")
+const LoginForm : FC<InjectedFormProps<FormLoginProps>> = ({handleSubmit}) => {
 
     return (
         <form onSubmit={handleSubmit} className={s.login}>
             <div className={s.login__container}>
                 <div className={s.login__form}>
-                    <input type="text" name="username" placeholder="Логін" className={s.login__style}  />
+                    <Field component="input" type="text" name="username" placeholder="Логін" className={s.login__style}  />
                 </div>
                 <div className={s.login__form}>
-                    <input type="password" name="password" placeholder="Пароль" className={s.login__style}  />
+                    <Field component="input" type="password" name="password" placeholder="Пароль" className={s.login__style}  />
                 </div>
                 <div className={s.login__btn} >
                     <button className={s.login__submit} >Вхід</button>
@@ -59,10 +58,7 @@ const LoginForm = (props: any & InjectedFormProps<FormLoginProps, any>) => {
 }
 
 
-
-
-
-const LoginReduxForm = reduxForm<FormLoginProps, any>({
+const LoginReduxForm = reduxForm<FormLoginProps>({
     form: "login"
 })(LoginForm);
 
