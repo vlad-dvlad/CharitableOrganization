@@ -26,11 +26,13 @@ export const authReducer = (state = initialState, action: AuthAction): AuthState
         case AuthActionTypes.SET_REGISTER:
             return {...state, isRegister : action.flag}
         case AuthActionTypes.SET_USER :
-            return { ...state, loading: true, error: null }
+            return { ...state, loading: true, error: null, username: action.username } // доробити
         case AuthActionTypes.SET_USER_SUCCESS:
             return { ...state, loading: false, error: null, isAuth: action.isAuth}
         case AuthActionTypes.SET_USER_ERROR:
-            return { ...state, loading: false, error: action.payload}
+            return { ...state, loading: false, error: action.payload }
+        case AuthActionTypes.SET_REGISTER_USER:
+            return {...state, isRegister: action.isRegister}
         default: return state;
     }
 }

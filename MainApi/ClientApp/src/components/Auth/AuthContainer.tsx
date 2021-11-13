@@ -1,7 +1,6 @@
 ﻿import * as React from 'react';
 import Login from "./Login";
 import Register from "./Register";
-import {useState} from "react";
 import {usedTypedSelector} from "../../hooks/useTypedSelector";
 import {setRegisterUser} from "../../store/actionCreators/auth";
 import {useActions} from "../../hooks/useActions";
@@ -13,7 +12,7 @@ const AuthContainer = () => {
     let isAuth = usedTypedSelector(state => state.auth.isAuth);
 
 
-    const {setRegisterUser, setLoginUser} = useActions();
+    const { setRegisterUser, setLoginUser, setRegisterUserProfile} = useActions();
 
     const setRegister = (flag : boolean) => {
         setRegisterUser(flag);
@@ -26,7 +25,7 @@ const AuthContainer = () => {
                 isRegister && <Login setLoginUser={setLoginUser} isAuth={isAuth}/>
             }
             {
-                !isRegister && <Register />
+                !isRegister && <Register setRegisterUserProfile={setRegisterUserProfile} isRegister={isRegister}/>
             }
             <div onClick={() => setRegister(false)}>Registration</div>
         </div>
