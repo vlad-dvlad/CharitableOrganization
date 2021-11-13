@@ -3,6 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var react_router_dom_1 = require("react-router-dom");
 var redux_form_1 = require("redux-form");
+var ControlForm_1 = require("../\u0421ommon/ControlForm");
+var validators_1 = require("../../utils/validators");
 var s = require("./auth.module.scss");
 var Login = function (props) {
     var onSubmit = function (formData) {
@@ -19,9 +21,9 @@ var LoginForm = function (_a) {
     return (React.createElement("form", { onSubmit: handleSubmit, className: s.login },
         React.createElement("div", { className: s.login__container },
             React.createElement("div", { className: s.login__form },
-                React.createElement(redux_form_1.Field, { component: "input", type: "text", name: "username", placeholder: "\u041B\u043E\u0433\u0456\u043D", className: s.login__style })),
+                React.createElement(redux_form_1.Field, { component: ControlForm_1.Input, type: "text", name: "username", placeholder: "\u041B\u043E\u0433\u0456\u043D", className: s.login__style, validate: validators_1.required })),
             React.createElement("div", { className: s.login__form },
-                React.createElement(redux_form_1.Field, { component: "input", type: "password", name: "password", placeholder: "\u041F\u0430\u0440\u043E\u043B\u044C", className: s.login__style })),
+                React.createElement(redux_form_1.Field, { component: ControlForm_1.Input, type: "password", name: "password", placeholder: "\u041F\u0430\u0440\u043E\u043B\u044C", className: s.login__style, validate: validators_1.required })),
             React.createElement("div", { className: s.login__btn },
                 React.createElement("button", { className: s.login__submit }, "\u0412\u0445\u0456\u0434")))));
 };
