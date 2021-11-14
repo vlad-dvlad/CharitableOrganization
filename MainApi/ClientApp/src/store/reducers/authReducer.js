@@ -41,7 +41,7 @@ var authReducer = function (state, action) {
         case auth_1.AuthActionTypes.SET_USER_ERROR:
             return __assign(__assign({}, state), { loading: false, error: action.payload });
         case auth_1.AuthActionTypes.SET_REGISTER_USER:
-            return __assign(__assign({}, state), { isRegister: true });
+            return __assign(__assign({}, state), { isRegister: action.isRegister });
         default: return state;
     }
 };

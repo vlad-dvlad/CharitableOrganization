@@ -9,7 +9,7 @@ $mainFont: 'Poppins', sans-serif;
     z-index: 5;
     width: 100%;
     height: 90px;
-    background-color: #3eadaae7;
+    background-color: #b33a94e7;
 
     &__container {
         display: flex;
@@ -40,6 +40,4 @@ $mainFont: 'Poppins', sans-serif;
         text-transform: uppercase;
         font-family: $mainFont;
     }
-
-   
 }
