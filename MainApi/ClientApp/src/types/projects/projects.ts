@@ -1,5 +1,5 @@
 export interface ProjectsState {
-    projects : [];
+    projects : any[];
     pageSize: number;
     totalProjectsCount: number;
     currentPage: number;
@@ -45,7 +45,7 @@ interface SetCurrentPage {
 
 interface SetProjects {
     type: ProjectsActionTypes.SET_PROJECTS;
-    project: {};
+    projects: any[];
 }
 
 interface SetProjectsCount {
@@ -54,8 +54,8 @@ interface SetProjectsCount {
 }
 
 export type ProjectsAction = FollowAction | UnfollowAction
-            | ToggleIsFetching | ToggleIsFollowingProgress
-            | SetCurrentPage | SetProjects;
+    | ToggleIsFetching | ToggleIsFollowingProgress
+    | SetCurrentPage | SetProjects | SetProjectsCount;
 
 
 

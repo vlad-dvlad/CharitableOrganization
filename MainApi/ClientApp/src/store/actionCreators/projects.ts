@@ -1,6 +1,17 @@
 import {ProjectsAction, ProjectsActionTypes} from '../../types/projects/projects';
 import {Dispatch} from "redux";
-import {instance} from "../../api/api";
+import { instance } from "../../api/api";
+
+interface ProjectsArray {
+    projects: [
+        /*{
+            name: string,
+            description: string,
+            isCompleted: boolean,
+            id: number,
+        }*/
+    ]
+}
 
 export const follow = (userId: number) => ({type: ProjectsActionTypes.FOLLOW, userId})
 
@@ -19,14 +30,39 @@ export const toggleIsFollowingProgress = (isFetching : boolean, userId : number)
     ({type: ProjectsActionTypes.TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId})
 
 // Thunks
-export const getProjects = (pageSize: number, currentPage: number) => async (dispatch: Dispatch<ProjectsAction>) => {
-    dispatch({type: ProjectsActionTypes.TOGGLE_IS_FETCHING, isFetching: true});
+export const getProjects = (pageSize = 6, currentPage = 1) => async (dispatch: Dispatch<ProjectsAction>) => {
+/*    dispatch({type: ProjectsActionTypes.TOGGLE_IS_FETCHING, isFetching: true});
     dispatch({type: ProjectsActionTypes.SET_CURRENT_PAGE, currentPage});
 
     let response = await instance.get(`projects?take=${pageSize}&skip=${currentPage}`);
-    if (response.data.isSuccessful) {
-        dispatch({type: ProjectsActionTypes.TOGGLE_IS_FETCHING, isFetching: false});
+    
+    dispatch({type: ProjectsActionTypes.TOGGLE_IS_FETCHING, isFetching: false});
+    // some dispatch
+    // {type: ProjectsActionTypes.SET_PROJECTS, count}
+
+    let projectsArr: any[] = response.data;
+    console.log(response.data);
+
+    dispatch({ type: ProjectsActionTypes.SET_PROJECTS, projects: projectsArr });
+    dispatch({ type: ProjectsActionTypes.SET_TOTAL_COUNT, count: projectsArr.length });*/
+    try {
+        console.log("jsdjjd");
+        dispatch({ type: ProjectsActionTypes.TOGGLE_IS_FETCHING, isFetching: true });
+        dispatch({ type: ProjectsActionTypes.SET_CURRENT_PAGE, currentPage });
+
+        let response = await instance.get(`projects?take=${pageSize}&skip=${currentPage}`);
+
+        dispatch({ type: ProjectsActionTypes.TOGGLE_IS_FETCHING, isFetching: false });
         // some dispatch
         // {type: ProjectsActionTypes.SET_PROJECTS, count}
+
+        let projectsArr: any[] = response.data;
+        console.log(response.data);
+
+        dispatch({ type: ProjectsActionTypes.SET_PROJECTS, projects: projectsArr });
+        dispatch({ type: ProjectsActionTypes.SET_TOTAL_COUNT, count: projectsArr.length });
+    } catch (e) {
+
     }
+
 }

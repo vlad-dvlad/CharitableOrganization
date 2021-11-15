@@ -58,24 +58,34 @@ var toggleIsFollowingProgress = function (isFetching, userId) {
 };
 exports.toggleIsFollowingProgress = toggleIsFollowingProgress;
 // Thunks
-var getProjects = function (pageSize, currentPage) { return function (dispatch) { return __awaiter(void 0, void 0, void 0, function () {
-    var response;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                dispatch({ type: projects_1.ProjectsActionTypes.TOGGLE_IS_FETCHING, isFetching: true });
-                dispatch({ type: projects_1.ProjectsActionTypes.SET_CURRENT_PAGE, currentPage: currentPage });
-                return [4 /*yield*/, api_1.instance.get("projects?take=" + pageSize + "&skip=" + currentPage)];
-            case 1:
-                response = _a.sent();
-                if (response.data.isSuccessful) {
+var getProjects = function (pageSize, currentPage) {
+    if (pageSize === void 0) { pageSize = 6; }
+    if (currentPage === void 0) { currentPage = 1; }
+    return function (dispatch) { return __awaiter(void 0, void 0, void 0, function () {
+        var response, projectsArr, e_1;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    console.log("jsdjjd");
+                    dispatch({ type: projects_1.ProjectsActionTypes.TOGGLE_IS_FETCHING, isFetching: true });
+                    dispatch({ type: projects_1.ProjectsActionTypes.SET_CURRENT_PAGE, currentPage: currentPage });
+                    return [4 /*yield*/, api_1.instance.get("projects?take=" + pageSize + "&skip=" + currentPage)];
+                case 1:
+                    response = _a.sent();
                     dispatch({ type: projects_1.ProjectsActionTypes.TOGGLE_IS_FETCHING, isFetching: false });
-                    // some dispatch
-                    // {type: ProjectsActionTypes.SET_PROJECTS, count}
-                }
-                return [2 /*return*/];
-        }
-    });
-}); }; };
+                    projectsArr = response.data;
+                    console.log(response.data);
+                    dispatch({ type: projects_1.ProjectsActionTypes.SET_PROJECTS, projects: projectsArr });
+                    dispatch({ type: projects_1.ProjectsActionTypes.SET_TOTAL_COUNT, count: projectsArr.length });
+                    return [3 /*break*/, 3];
+                case 2:
+                    e_1 = _a.sent();
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
+            }
+        });
+    }); };
+};
 exports.getProjects = getProjects;
 //# sourceMappingURL=projects.js.map
