@@ -5,25 +5,34 @@ const s = require("./project.module.scss");
 interface ProjectStateProps {
     name: string
     description: string;
-    status: boolean;
+    isCompleted: boolean;
 }
 
 const Project: React.FC<ProjectStateProps> = (props) => {
 
-    const { name, description, status } = props;
+    const { name, description, isCompleted } = props;
+
+    console.log(isCompleted);
 
     return (
         <div className={s.projects__item} >
             <div className={s.project__container}>
                 <div className={s.project__image}>
-                    <img src="https://cdn.pixabay.com/photo/2015/03/30/20/33/heart-700141__480.jpg"
+                    <img src="https://ollmlb.org/wp-content/uploads/goodness.jpg"
                         alt="Image not found!" />
                 </div>
                 <div className={s.project__name}>
                     <h2>{ name }</h2>
                 </div>
                 <div className={s.project__status}>
-                    <h2>Status: { status }</h2>
+                    <h2>
+                        {
+                            !isCompleted && "Активний проект"
+                        }
+                        {
+                            isCompleted && "Завершений проект"
+                        }
+                    </h2>
                 </div>
                 <div className={s.project__btn}>
                     <button>Read More</button>

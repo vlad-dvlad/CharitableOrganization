@@ -12,11 +12,13 @@ const ProjectsContainer = () => {
     let { getProjects, setPage } = useActions();
 
     useEffect(() => {
-        getProjects(pageSize = 6, currentPage = 1);
+        getProjects(pageSize, currentPage);
     }, [currentPage]);
 
     
-
+    const onPageChanged = (pageNum: number) => {
+        getProjects(pageSize, pageNum);
+    }
 
     return (
         <div>
@@ -24,7 +26,7 @@ const ProjectsContainer = () => {
                       totalProjectsCount={totalProjectsCount}
                       currentPage={currentPage} isFetching={isFetching}
                       isFollowingInProgress={isFollowingInProgress}
-                      setPage={setPage}/>
+                      onPageChanged={onPageChanged}/>
         </div>
     );
 };

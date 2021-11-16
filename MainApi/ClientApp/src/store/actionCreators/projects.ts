@@ -30,37 +30,21 @@ export const toggleIsFollowingProgress = (isFetching : boolean, userId : number)
     ({type: ProjectsActionTypes.TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId})
 
 // Thunks
-export const getProjects = (pageSize = 6, currentPage = 1) => async (dispatch: Dispatch<ProjectsAction>) => {
-/*    dispatch({type: ProjectsActionTypes.TOGGLE_IS_FETCHING, isFetching: true});
-    dispatch({type: ProjectsActionTypes.SET_CURRENT_PAGE, currentPage});
-
-    let response = await instance.get(`projects?take=${pageSize}&skip=${currentPage}`);
-    
-    dispatch({type: ProjectsActionTypes.TOGGLE_IS_FETCHING, isFetching: false});
-    // some dispatch
-    // {type: ProjectsActionTypes.SET_PROJECTS, count}
-
-    let projectsArr: any[] = response.data;
-    console.log(response.data);
-
-    dispatch({ type: ProjectsActionTypes.SET_PROJECTS, projects: projectsArr });
-    dispatch({ type: ProjectsActionTypes.SET_TOTAL_COUNT, count: projectsArr.length });*/
+export const getProjects = (pageSize: number, currentPage: number) => async (dispatch: Dispatch<ProjectsAction>) => {
     try {
-        console.log("jsdjjd");
         dispatch({ type: ProjectsActionTypes.TOGGLE_IS_FETCHING, isFetching: true });
         dispatch({ type: ProjectsActionTypes.SET_CURRENT_PAGE, currentPage });
 
-        let response = await instance.get(`projects?take=${pageSize}&skip=${currentPage}`);
+        let response = await instance.get(`projects?pageSize=${pageSize}&page=${currentPage}`);
 
         dispatch({ type: ProjectsActionTypes.TOGGLE_IS_FETCHING, isFetching: false });
-        // some dispatch
-        // {type: ProjectsActionTypes.SET_PROJECTS, count}
 
-        let projectsArr: any[] = response.data;
+        let projectsArr: any[] = response.data.projects;
         console.log(response.data);
+        let totalCount = response.data.totalCount;
 
         dispatch({ type: ProjectsActionTypes.SET_PROJECTS, projects: projectsArr });
-        dispatch({ type: ProjectsActionTypes.SET_TOTAL_COUNT, count: projectsArr.length });
+        dispatch({ type: ProjectsActionTypes.SET_TOTAL_COUNT, count: totalCount });
     } catch (e) {
 
     }

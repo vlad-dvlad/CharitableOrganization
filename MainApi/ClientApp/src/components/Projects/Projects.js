@@ -23,11 +23,10 @@ var Projects = function (props) {
                  </div>)}
              </div>
          ));*/
-    var content = projectRows.map(function (row, idx) { return (React.createElement("div", { className: s.projects__row, key: idx }, row.map(function (p) { return React.createElement("div", { key: p, className: s.projects__item }, React.createElement(Project_1.default, { name: p.name, description: p.description, status: p.status })); }))); });
-    var projects = props.projects;
+    var content = projectRows.map(function (row, idx) { return (React.createElement("div", { className: s.projects__row, key: idx }, row.map(function (p) { return React.createElement("div", { key: p, className: s.projects__item }, React.createElement(Project_1.default, { name: p.name, description: p.description, isCompleted: p.isCompleted })); }))); });
     return (React.createElement("div", { className: s.projects + " " + s.projects__container },
         content,
-        React.createElement(Paginator_1.default, { totalProjectsCount: props.totalProjectsCount, pageSize: props.pageSize, currentPage: props.currentPage, setPage: props.setPage })));
+        React.createElement(Paginator_1.default, { totalProjectsCount: props.totalProjectsCount, pageSize: props.pageSize, currentPage: props.currentPage, onPageChanged: props.onPageChanged })));
 };
 exports.default = Projects;
 //# sourceMappingURL=Projects.js.map

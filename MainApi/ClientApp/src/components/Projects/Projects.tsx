@@ -1,7 +1,6 @@
 ﻿import * as React from 'react';
 import Paginator from "../Сommon/Paginator";
 import Project from './Project';
-import ProjectRow from "./ProjectRow";
 const s = require("./project.module.scss");
 
 export interface ProjectStateProps {
@@ -14,7 +13,7 @@ export interface ProjectStateProps {
 }
 
 export interface ProjectDispatchProps {
-    setPage: (p: number) => void;
+    onPageChanged: (p: number) => void;
 }
 
 const Projects : React.FC<ProjectStateProps & ProjectDispatchProps> = (props) => {
@@ -37,11 +36,10 @@ const Projects : React.FC<ProjectStateProps & ProjectDispatchProps> = (props) =>
         <div className={s.projects__row} key={idx}>
             {row.map(p => <div key={p} className={s.projects__item}>{<Project name={p.name}
                 description={p.description}
-                status={p.status} /> }</div> )}
+                isCompleted={p.isCompleted} /> }</div> )}
         </div> )
     );
 
-    const { projects } = props;
 
 
     return (
@@ -59,7 +57,7 @@ const Projects : React.FC<ProjectStateProps & ProjectDispatchProps> = (props) =>
             { content }
 
             <Paginator totalProjectsCount={props.totalProjectsCount} pageSize={props.pageSize}
-                currentPage={props.currentPage} setPage={props.setPage} />
+                currentPage={props.currentPage} onPageChanged={props.onPageChanged} />
 
             {/*<div className={s.projects__row}>*/}
             {/*    <div className={s.projects__item}>*/}

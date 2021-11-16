@@ -9,10 +9,13 @@ var ProjectsContainer = function () {
     var _a = (0, useTypedSelector_1.usedTypedSelector)(function (state) { return state.projects; }), projects = _a.projects, pageSize = _a.pageSize, totalProjectsCount = _a.totalProjectsCount, currentPage = _a.currentPage, isFetching = _a.isFetching, isFollowingInProgress = _a.isFollowingInProgress;
     var _b = (0, useActions_1.useActions)(), getProjects = _b.getProjects, setPage = _b.setPage;
     (0, react_1.useEffect)(function () {
-        getProjects(pageSize = 6, currentPage = 1);
+        getProjects(pageSize, currentPage);
     }, [currentPage]);
+    var onPageChanged = function (pageNum) {
+        getProjects(pageSize, pageNum);
+    };
     return (React.createElement("div", null,
-        React.createElement(Projects_1.default, { projects: projects, pageSize: pageSize, totalProjectsCount: totalProjectsCount, currentPage: currentPage, isFetching: isFetching, isFollowingInProgress: isFollowingInProgress, setPage: setPage })));
+        React.createElement(Projects_1.default, { projects: projects, pageSize: pageSize, totalProjectsCount: totalProjectsCount, currentPage: currentPage, isFetching: isFetching, isFollowingInProgress: isFollowingInProgress, onPageChanged: onPageChanged })));
 };
 exports.default = ProjectsContainer;
 //# sourceMappingURL=ProjectsContainer.js.map

@@ -1,4 +1,5 @@
 ﻿using ApplicationCore.DAL;
+using ApplicationCore.Entites;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -22,11 +23,13 @@ namespace MainApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllAsync(int pageSize = 10, int page = 1)
+        public async Task<IActionResult> GetAllAsync(int pageSize = 6, int page = 1)
         {
-            var projects = await _ctx.Projects.Take(pageSize).Skip(pageSize * (page - 1)).ToListAsync();
+            var projects = await _ctx.Projects.Skip(pageSize * (page - 1)).Take(pageSize).ToListAsync();
 
-            return Ok(projects);
+            var totalCount = _ctx.Projects.Count(); /*(from a in _ctx.Projects select a).Count();*/
+
+            return Ok(new { projects, totalCount});
         }
 
         [HttpGet("{id}")]
